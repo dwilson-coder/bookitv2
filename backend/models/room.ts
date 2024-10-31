@@ -1,4 +1,15 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
+
+export interface IImage extends Document {
+  public_id: string;
+  url: string;
+}
+
+export interface IReview extends Document {
+  user: mongoose.Schema.Types.ObjectId;
+  rating: number;
+  comment: string;
+}
 
 export interface ILocation {
   type: string;
@@ -10,23 +21,13 @@ export interface ILocation {
   country: string;
 }
 
-export interface IReview extends Document {
-  user: mongoose.Schema.Types.ObjectId;
-  rating: number;
-  comment: string;
-}
-
-export interface IImage extends Document {
-  public_id: string;
-  url: string;
-}
 export interface IRoom extends Document {
   name: string;
   description: string;
   pricePerNight: number;
   address: string;
   location: ILocation;
-  numOfBeds: number;
+  guestCapacity: number;
   isInternet: boolean;
   isBreakfast: boolean;
   isAirConditioned: boolean;
@@ -50,7 +51,7 @@ const roomSchema: Schema = new Schema({
   },
   description: {
     type: String,
-    required: [true, "Please enter room description"],
+    required: [true, "Please enter room name"],
   },
   pricePerNight: {
     type: Number,
@@ -67,7 +68,7 @@ const roomSchema: Schema = new Schema({
       enum: ["Point"],
     },
     coordinates: {
-      type: Number,
+      type: [Number],
       index: "2dsphere",
     },
     formattedAddress: String,
@@ -84,7 +85,6 @@ const roomSchema: Schema = new Schema({
     type: Number,
     required: [true, "Please enter number of beds in room"],
   },
-
   isInternet: {
     type: Boolean,
     default: false,
@@ -129,7 +129,7 @@ const roomSchema: Schema = new Schema({
     type: String,
     required: [true, "Please enter room category"],
     enum: {
-      values: ["King", "Queen", "Single", "Twin"],
+      values: ["King", "Single", "Twins"],
       message: "Please select correct category for room",
     },
   },
