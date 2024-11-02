@@ -31,7 +31,9 @@ export const newRoom = catchAsyncErrors(async (req: NextRequest) => {
 // Get room details  =>  /api/rooms/:id
 export const getRoomDetails = catchAsyncErrors(
   async (req: NextRequest, { params }: { params: { id: string } }) => {
-    const room = await Room.findById(params.id);
+    const { id } = await params;
+    const room = await Room.findById(id);
+    //   const room = await Room.findById(params.id);
 
     if (!room) {
       throw new ErrorHandler("Room not found", 404);
@@ -47,14 +49,16 @@ export const getRoomDetails = catchAsyncErrors(
 // Update room details  =>  /api/admin/rooms/:id
 export const updateRoom = catchAsyncErrors(
   async (req: NextRequest, { params }: { params: { id: string } }) => {
-    let room = await Room.findById(params.id);
+    const { id } = await params;
+    let room = await Room.findById(id);
+    //  let room = await Room.findById(params.id);
     const body = await req.json();
 
     if (!room) {
       throw new ErrorHandler("Room not found", 404);
     }
-
-    room = await Room.findByIdAndUpdate(params.id, body, {
+    room = await Room.findByIdAndUpdate(id, body, {
+      // room = await Room.findByIdAndUpdate(params.id, body, {
       new: true,
     });
 
@@ -68,7 +72,9 @@ export const updateRoom = catchAsyncErrors(
 // Delete room details  =>  /api/admin/rooms/:id
 export const deleteRoom = catchAsyncErrors(
   async (req: NextRequest, { params }: { params: { id: string } }) => {
-    const room = await Room.findById(params.id);
+    const { id } = await params;
+    const room = await Room.findById(id);
+    //  const room = await Room.findById(params.id);
 
     if (!room) {
       throw new ErrorHandler("Room not found", 404);
