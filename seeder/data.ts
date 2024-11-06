@@ -21,7 +21,7 @@ export const rooms = [
       },
       {
         public_id: "bookit/demo/ao7enhxobr0z1qyxgyki",
-        url: "http://res.cloudinary.com/udemy-courses/image/upload/v1693135931/bookit/demo/ao7enhxobr0z1qyxgyki.jpg",
+        url: "https://res.cloudinary.com/udemy-courses/image/upload/v1694680598/bookit/demo/tvheutup1idr5wi0p5bq.jpg",
       },
     ],
     category: "King",
