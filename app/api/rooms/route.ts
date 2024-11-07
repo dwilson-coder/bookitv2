@@ -3,7 +3,11 @@ import { allRooms } from "@/backend/controllers/roomControllers";
 import { createEdgeRouter } from "next-connect";
 import { NextRequest } from "next/server";
 
-interface RequestContext {}
+interface RequestContext {
+  params: {
+    id: string;
+  };
+}
 
 const router = createEdgeRouter<NextRequest, RequestContext>();
 dbConnect();
